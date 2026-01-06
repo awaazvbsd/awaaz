@@ -1,0 +1,205 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  color-scheme: dark;
+
+  /* Accent Color System - Default Purple */
+  --accent-primary: #a855f7;
+  --accent-secondary: #8b5cf6;
+  --accent-gradient: linear-gradient(135deg, #a855f7, #8b5cf6);
+
+  /* Accent Transition Duration */
+  --accent-transition: 0.4s ease;
+}
+
+@layer base {
+
+  /* Prevent text selection globally for app-like feel */
+  html,
+  body {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+  }
+
+  /* Allow text selection in inputs and textareas */
+  input,
+  textarea,
+  [contenteditable="true"] {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+}
+
+/* Smooth transitions for accent-colored elements */
+.accent-transition,
+.accent-transition * {
+  transition: background-color var(--accent-transition),
+    border-color var(--accent-transition),
+    color var(--accent-transition),
+    box-shadow var(--accent-transition);
+}
+
+/* Accent color utility classes - for subtle theming */
+
+/* Background with accent gradient */
+.accent-bg {
+  background: var(--accent-gradient) !important;
+  transition: background var(--accent-transition);
+}
+
+/* Solid accent background */
+.accent-bg-solid {
+  background-color: var(--accent-primary) !important;
+  transition: background-color var(--accent-transition);
+}
+
+/* Subtle accent background (10% opacity) */
+.accent-bg-subtle {
+  background-color: color-mix(in srgb, var(--accent-primary) 15%, transparent) !important;
+  transition: background-color var(--accent-transition);
+}
+
+/* Accent border */
+.accent-border {
+  border-color: var(--accent-primary) !important;
+  transition: border-color var(--accent-transition);
+}
+
+/* Subtle accent border (30% opacity) */
+.accent-border-subtle {
+  border-color: color-mix(in srgb, var(--accent-primary) 30%, transparent) !important;
+  transition: border-color var(--accent-transition);
+}
+
+/* Accent text color */
+.accent-text {
+  color: var(--accent-primary) !important;
+  transition: color var(--accent-transition);
+}
+
+/* Accent glow/shadow */
+.accent-glow {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  transition: box-shadow var(--accent-transition);
+}
+
+/* Subtle accent glow */
+.accent-glow-subtle {
+  box-shadow: 0 0 15px color-mix(in srgb, var(--accent-primary) 25%, transparent);
+  transition: box-shadow var(--accent-transition);
+}
+
+/* Ring with accent color */
+.accent-ring {
+  box-shadow: 0 0 0 2px var(--accent-primary);
+  transition: box-shadow var(--accent-transition);
+}
+
+.loader-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.loader-letter {
+  display: inline-block;
+  font-size: 0.95rem;
+  animation: loader-letter-anim 1.6s ease-in-out infinite;
+}
+
+.loader-letter:nth-of-type(1) {
+  animation-delay: 0s;
+}
+
+.loader-letter:nth-of-type(2) {
+  animation-delay: 0.05s;
+}
+
+.loader-letter:nth-of-type(3) {
+  animation-delay: 0.1s;
+}
+
+.loader-letter:nth-of-type(4) {
+  animation-delay: 0.15s;
+}
+
+.loader-letter:nth-of-type(5) {
+  animation-delay: 0.2s;
+}
+
+.loader-letter:nth-of-type(6) {
+  animation-delay: 0.25s;
+}
+
+.loader-letter:nth-of-type(7) {
+  animation-delay: 0.3s;
+}
+
+.loader-letter:nth-of-type(8) {
+  animation-delay: 0.35s;
+}
+
+.loader-letter:nth-of-type(9) {
+  animation-delay: 0.4s;
+}
+
+.loader-letter:nth-of-type(10) {
+  animation-delay: 0.45s;
+}
+
+.loader {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  animation: loader-rotate 1.8s ease-in-out infinite;
+}
+
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(90deg);
+    box-shadow: 0 10px 20px 0 #fff inset,
+      0 20px 30px 0 #ad5fff inset,
+      0 60px 60px 0 #471eec inset;
+  }
+
+  50% {
+    transform: rotate(270deg);
+    box-shadow: 0 10px 20px 0 #fff inset,
+      0 20px 10px 0 #d60a47 inset,
+      0 40px 60px 0 #311e80 inset;
+  }
+
+  100% {
+    transform: rotate(450deg);
+    box-shadow: 0 10px 20px 0 #fff inset,
+      0 20px 30px 0 #ad5fff inset,
+      0 60px 60px 0 #471eec inset;
+  }
+}
+
+@keyframes loader-letter-anim {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+
+  20% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  40% {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "AWAAZ",
+  "description": "A scientifically-accurate voice stress analysis interface for detecting stress in students through 10-second voice samples. The app uses research-validated acoustic biomarkers to analyze stress levels, displaying results through spectrograms and detailed biomarker analysis.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

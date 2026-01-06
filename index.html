@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'background-primary': '#0F0F0F',
+            'background-secondary': '#1A1A1A',
+            'surface': '#262626',
+            'purple-primary': '#8B5CF6',
+            'purple-light': '#A855F7',
+            'purple-dark': '#7C3AED',
+            'orange-primary': '#FF6B35',
+            'orange-light': '#FF8E53',
+            'orange-warning': '#F59E0B',
+            'success-green': '#22C55E',
+            'error-red': '#EF4444',
+            'text-primary': '#FFFFFF',
+            'text-secondary': '#E5E5E5',
+            'text-muted': '#9CA3AF',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    @keyframes pulse-green {
+
+      0%,
+      100% {
+        box-shadow: 0 0 10px rgba(34, 197, 94, 0.3), 0 0 20px rgba(34, 197, 94, 0.1);
+      }
+
+      50% {
+        box-shadow: 0 0 14px rgba(34, 197, 94, 0.6), 0 0 28px rgba(34, 197, 94, 0.3);
+      }
+    }
+
+    @keyframes pulse-orange {
+
+      0%,
+      100% {
+        box-shadow: 0 0 12px rgba(255, 142, 83, 0.4), 0 0 24px rgba(255, 142, 83, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 16px rgba(255, 142, 83, 0.7), 0 0 32px rgba(255, 142, 83, 0.4);
+      }
+    }
+
+    @keyframes pulse-red {
+
+      0%,
+      100% {
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.5), 0 0 30px rgba(239, 68, 68, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.8), 0 0 40px rgba(239, 68, 68, 0.5);
+      }
+    }
+
+    .pulse-green {
+      animation: pulse-green 2s ease-in-out infinite;
+    }
+
+    .pulse-orange {
+      animation: pulse-orange 1.5s ease-in-out infinite;
+    }
+
+    .pulse-red {
+      animation: pulse-red 1s ease-in-out infinite;
+    }
+
+    @keyframes animated-gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .animated-gradient {
+      background-size: 200% 200%;
+      animation: animated-gradient 15s ease infinite;
+    }
+
+    @keyframes pulse-purple {
+
+      0%,
+      100% {
+        box-shadow: 0 0 15px rgba(139, 92, 246, 0.3), 0 0 30px rgba(139, 92, 246, 0.1);
+      }
+
+      50% {
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.6), 0 0 40px rgba(139, 92, 246, 0.3);
+      }
+    }
+
+    .pulse-purple {
+      animation: pulse-purple 2s ease-in-out infinite;
+    }
+
+    .glass-base {
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    .animate-shimmer {
+      animation: shimmer 2s infinite;
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "framer-motion": "https://esm.sh/framer-motion@11.2.10?external=react",
+    "@google/generative-ai": "https://esm.sh/@google/generative-ai@0.11.3",
+    "@google/genai": "https://esm.sh/@google/genai@latest",
+    "meyda": "https://esm.sh/meyda@5.6.2"
+  }
+}
+</script>
+  <script type="module" src="./index.tsx"></script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body class="bg-background-primary text-text-primary">
+  <svg style="position:absolute; width:0; height:0; overflow:hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="1.5" result="coloredBlur"></feGaussianBlur>
+        <feMerge>
+          <feMergeNode in="coloredBlur"></feMergeNode>
+          <feMergeNode in="SourceGraphic"></feMergeNode>
+        </feMerge>
+      </filter>
+    </defs>
+  </svg>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+flask==3.0.0
+flask-cors==4.0.0
+praat-parselmouth==0.4.4
+numpy==1.24.3
+scipy==1.11.4
+python-dotenv==1.0.0
+gunicorn==21.2.0
+stream-chat==4.26.0
