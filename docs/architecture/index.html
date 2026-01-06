@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWAAZ Architecture Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-right: 2px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin: 8px 0;
+        }
+
+        .sidebar a {
+            color: #555;
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .sidebar a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .main-content {
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            scroll-margin-top: 20px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #667eea;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.6em;
+            margin: 30px 0 15px 0;
+        }
+
+        .section h4 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 20px 0 10px 0;
+        }
+
+        .diagram-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .diagram-container pre {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+            white-space: pre;
+            margin: 0;
+        }
+
+        .flow-step {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+        }
+
+        .flow-step h4 {
+            color: #1976d2;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .tech-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tech-card h3 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tech-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .layer-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .layer-section h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+            border-left: 5px solid #5c6bc0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-item h4 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .arrow {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                height: auto;
+                border-right: none;
+                border-bottom: 2px solid #e0e0e0;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ AWAAZ Architecture Documentation</h1>
+            <p>Complete System Architecture, Data Flow & Technology Stack</p>
+        </div>
+
+        <div class="content-wrapper">
+            <nav class="sidebar">
+                <h2>📑 Quick Navigation</h2>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#dataflow">1. Data Flow Diagram</a></li>
+                    <li><a href="#architecture">2. Architecture Diagram</a></li>
+                    <li><a href="#techstack">3. Technology Stack</a></li>
+                    <li><a href="#frontend">Frontend Layer</a></li>
+                    <li><a href="#middleware">Middleware Layer</a></li>
+                    <li><a href="#backend">Backend Processing</a></li>
+                    <li><a href="#ai-services">AI Services</a></li>
+                    <li><a href="#security">Security & Config</a></li>
+                    <li><a href="#deployment">Deployment</a></li>
+                </ul>
+            </nav>
+
+            <main class="main-content">
+                <!-- Overview Section -->
+                <section id="overview" class="section">
+                    <h2>📊 System Overview</h2>
+                    <div class="info-box">
+                        <h4>AWAAZ - Audio Wellness Analytics for Academic Zones</h4>
+                        <p><strong>Purpose:</strong> Voice-based stress detection system for student mental health and wellness monitoring.</p>
+                        <p><strong>Architecture Type:</strong> Full-stack web application with external AI services</p>
+                        <p><strong>Deployment Model:</strong> Client-server with cloud AI integration</p>
+                    </div>
+                </section>
+
+                <!-- Data Flow Diagram Section -->
+                <section id="dataflow" class="section">
+                    <h2>1️⃣ Data Flow Diagram</h2>
+                    <p>This diagram illustrates how data flows through the AWAAZ system, from user input to final recommendations.</p>
+                    
+                    <div class="diagram-container">
+                        <pre>
+┌──────────┐      ┌──────────┐      ┌──────────────┐      ┌──────────┐
+│  User    │ ───► │ React UI │ ───► │ Flask API    │ ───► │  Praat   │
+│ (Browser)│      │(Frontend)│      │ (Middleware) │      │ Analysis │
+└──────────┘      └──────────┘      └──────────────┘      └──────────┘
+                        │                                        │
+                        │                                        ▼
+                        │                              ┌──────────────────┐
+                        │                              │ Voice Biomarkers │
+                        │                              │ • Pitch, Jitter  │
+                        │                              │ • Shimmer, HNR   │
+                        │                              └──────────────────┘
+                        │                                        │
+                        ▼                                        │
+                  ┌──────────────┐                              │
+                  │  Gemini API  │ ◄────────────────────────────┘
+                  │ (gemini-2.5) │
+                  └──────────────┘
+                        │
+                        ▼
+                  ┌──────────────────────┐
+                  │ AI Recommendations   │
+                  │ • Immediate Actions  │
+                  │ • Long-term Plans    │
+                  │ • Next Session       │
+                  └──────────────────────┘
+                        │
+                        ▼
+                  ┌──────────┐
+                  │  User    │
+                  │ (Results)│
+                  └──────────┘
+                        </pre>
+                    </div>
+
+                    <h3>Data Flow Steps</h3>
+                    
+                    <div class="flow-step">
+                        <h4>Step 1: User Input</h4>
+                        <p>User records voice sample through browser interface. Audio is captured in WAV/MP3 format.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <h4>Step 2: Frontend Processing</h4>
+                        <p>React UI validates and prepares audio data for transmission via REST API call to Flask backend.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <h4>Step 3: Backend Analysis</h4>
+                        <p>Flask API receives audio and forwards to Praat-parselmouth for voice biomarker extraction.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <h4>Step 4: Biomarker Extraction</h4>
+                        <p>Praat analyzes voice and extracts scientific features: Pitch, Jitter, Shimmer, HNR, Formants, Intensity.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <h4>Step 5: AI Analysis</h4>
+                        <p>Biomarkers and context (questionnaire, live answers) sent to Google Gemini API for psychological interpretation.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <h4>Step 6: Recommendation Generation</h4>
+                        <p>Gemini generates personalized immediate actions, long-term strategies, and next session timing.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <h4>Step 7: Results Display</h4>
+                        <p>React UI presents comprehensive results to user with visual indicators and actionable suggestions.</p>
+                    </div>
+                </section>
+
+                <!-- Architecture Diagram Section -->
+                <section id="architecture" class="section">
+                    <h2>2️⃣ System Architecture Diagram</h2>
+                    <p>Complete system architecture showing all layers, technologies, and their interactions.</p>
+
+                    <div class="diagram-container">
+                        <pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           FRONTEND / UI LAYER                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  UI Framework: React + TypeScript                                    │   │
+│  │  ─────────────────────────────────────────                           │   │
+│  │  • React Components (PostAnalysisSuggestionsScreen.tsx)             │   │
+│  │  • TypeScript (.tsx, .ts files)                                     │   │
+│  │  • Build Tool: Vite                                                 │   │
+│  │  • State Management: React Hooks                                    │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  UI Components & Styling                                             │   │
+│  │  ─────────────────────────────                                       │   │
+│  │  • CSS/Tailwind (likely)                                            │   │
+│  │  • Responsive Design                                                │   │
+│  │  • Material-UI or Custom Components                                 │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      │ HTTP/REST API
+                                      │ (localhost:8000)
+                                      ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          MIDDLEWARE / API LAYER                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  Web Framework: Flask 3.0.0                                          │   │
+│  │  ──────────────────────────────                                      │   │
+│  │  • REST API Endpoints                                               │   │
+│  │  • Route: /extract_features (voice analysis)                        │   │
+│  │  • Request/Response handling                                        │   │
+│  │  • File: backend/app.py                                             │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  Middleware Components                                               │   │
+│  │  ──────────────────────────                                          │   │
+│  │  • Flask-CORS 4.0.0 (Cross-Origin Resource Sharing)                │   │
+│  │  • Python-dotenv 1.0.0 (Environment variables)                     │   │
+│  │  • Request validation & error handling                              │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  Production Server: Gunicorn 21.2.0                                  │   │
+│  │  ───────────────────────────────────                                 │   │
+│  │  • WSGI HTTP Server                                                 │   │
+│  │  • Production deployment                                            │   │
+│  │  • Process management                                               │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      │
+                                      ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        BACKEND / PROCESSING LAYER                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  Voice Analysis Engine: Praat-parselmouth 0.4.4                      │   │
+│  │  ────────────────────────────────────────────────────                │   │
+│  │  • Pitch (F0) Extraction                                            │   │
+│  │  • Formant Analysis (F1, F2, F3, F4)                               │   │
+│  │  • Jitter & Shimmer (Voice Quality)                                │   │
+│  │  • Harmonics-to-Noise Ratio (HNR)                                  │   │
+│  │  • Intensity Measurements                                           │   │
+│  │  • Duration & Timing Analysis                                       │   │
+│  │  ⚠️  NOT AI/ML - Signal Processing Algorithms                      │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  Scientific Computing Libraries                                      │   │
+│  │  ───────────────────────────────────                                 │   │
+│  │  • NumPy 1.24.3 (Numerical computations)                           │   │
+│  │  • SciPy 1.11.4 (Statistical analysis, signal processing)          │   │
+│  │  • Mathematical operations (FFT, filtering, statistics)            │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  Real-time Communication                                             │   │
+│  │  ────────────────────────────                                        │   │
+│  │  • Stream Chat SDK 4.26.0                                           │   │
+│  │  • Live session management                                          │   │
+│  │  • Student-counselor interaction                                    │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      │
+                                      ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          EXTERNAL AI SERVICES                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  🤖 Google Gemini API (gemini-2.5-pro)                              │   │
+│  │  ───────────────────────────────────────                             │   │
+│  │  • Library: @google/generative-ai (Frontend)                        │   │
+│  │  • API Version: v1beta                                              │   │
+│  │  • Purpose: Psychological Analysis & Recommendations                │   │
+│  │                                                                      │   │
+│  │  Input:                                                              │   │
+│  │    ✓ Stress Level (0-100)                                          │   │
+│  │    ✓ Biomarkers (Pitch, Jitter, Shimmer, HNR, Formants)           │   │
+│  │    ✓ AI Summary (from Praat analysis)                              │   │
+│  │    ✓ Student Live Session Answers                                  │   │
+│  │    ✓ Pre-session Questionnaire Responses                           │   │
+│  │                                                                      │   │
+│  │  Output:                                                             │   │
+│  │    ✓ Immediate Action Suggestions (max 3)                          │   │
+│  │    ✓ Long-term Wellness Strategies (max 3)                         │   │
+│  │    ✓ Next Session Recommendation (3/7/14 days)                     │   │
+│  │                                                                      │   │
+│  │  🔑 API Key: VITE_GEMINI_API_KEY (from .env)                       │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          DATABASE / STORAGE LAYER                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  ⚠️  DATABASE NOT DETECTED IN CURRENT CODEBASE                              │
+│                                                                               │
+│  Possible Options (Need Confirmation):                                       │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  • File System Storage (audio files, session data)                  │   │
+│  │  • SQLite (lightweight embedded database)                            │   │
+│  │  • PostgreSQL (if production database exists)                        │   │
+│  │  • MongoDB (if NoSQL database exists)                                │   │
+│  │  • Session Storage / Local Storage (browser)                         │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+                        </pre>
+                    </div>
+                </section>
+
+                <!-- Technology Stack Section -->
+                <section id="techstack" class="section">
+                    <h2>3️⃣ Technology Stack</h2>
+                    
+                    <div class="success-box">
+                        <h4>📋 Stack Summary</h4>
+                        <p><strong>Architecture:</strong> Full-stack web application with external AI services</p>
+                        <p><strong>Last Updated:</strong> January 4, 2026</p>
+                        <p><strong>Primary Use Case:</strong> Mental health assessment and stress monitoring</p>
+                    </div>
+
+                    <!-- Frontend Technologies -->
+                    <div id="frontend" class="layer-section">
+                        <h3>🎨 Frontend Layer</h3>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Technology</th>
+                                    <th>Version</th>
+                                    <th>License</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>React</strong></td>
+                                    <td>Latest</td>
+                                    <td>MIT</td>
+                                    <td>UI component framework</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TypeScript</strong></td>
+                                    <td>Latest</td>
+                                    <td>Apache 2.0</td>
+                                    <td>Type-safe development</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Vite</strong></td>
+                                    <td>Latest</td>
+                                    <td>MIT</td>
+                                    <td>Build tool & dev server</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Key Frontend Features</h4>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <h4>Component Architecture</h4>
+                                <p>React component-based design for reusability and maintainability</p>
+                            </div>
+                            <div class="feature-item">
+                                <h4>Type Safety</h4>
+                                <p>TypeScript ensures code quality and developer productivity</p>
+                            </div>
+                            <div class="feature-item">
+                                <h4>Fast Development</h4>
+                                <p>Vite provides instant HMR and optimized builds</p>
+                            </div>
+                            <div class="feature-item">
+                                <h4>Responsive Design</h4>
+                                <p>Mobile-first approach with modern CSS frameworks</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Middleware Layer -->
+                    <div id="middleware" class="layer-section">
+                        <h3>🔌 Middleware / API Layer</h3>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Technology</th>
+                                    <th>Version</th>
+                                    <th>License</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Flask</strong></td>
+                                    <td>3.0.0</td>
+                                    <td>BSD-3-Clause</td>
+                                    <td>Python web framework</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Flask-CORS</strong></td>
+                                    <td>4.0.0</td>
+                                    <td>MIT</td>
+                                    <td>Cross-origin support</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Gunicorn</strong></td>
+                                    <td>21.2.0</td>
+                                    <td>MIT</td>
+                                    <td>WSGI production server</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>python-dotenv</strong></td>
+                                    <td>1.0.0</td>
+                                    <td>BSD-3-Clause</td>
+                                    <td>Environment configuration</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>API Endpoints</h4>
+                        <div class="code-block">
+POST /extract_features
+- Input: Audio file (WAV/MP3)
+- Output: Voice biomarkers + stress analysis
+- Port: 8000
+- Content-Type: multipart/form-data
+                        </div>
+                    </div>
+
+                    <!-- Backend Processing -->
+                    <div id="backend" class="layer-section">
+                        <h3>🧠 Backend Processing Layer</h3>
+                        
+                        <div class="tech-card">
+                            <h3><span class="tech-badge">Voice Analysis</span> Praat-parselmouth</h3>
+                            <p><strong>Version:</strong> 0.4.4 | <strong>License:</strong> GPL-3.0</p>
+                            <p><strong>Purpose:</strong> Scientific voice analysis and biomarker extraction</p>
+                            
+                            <h4>Biomarkers Extracted:</h4>
+                            <ul>
+                                <li>✅ <strong>Pitch (F0)</strong> - Fundamental frequency</li>
+                                <li>✅ <strong>Formants</strong> - F1, F2, F3, F4 (vocal tract resonances)</li>
+                                <li>✅ <strong>Jitter</strong> - Pitch variation (voice quality)</li>
+                                <li>✅ <strong>Shimmer</strong> - Amplitude variation</li>
+                                <li>✅ <strong>HNR</strong> - Harmonics-to-Noise Ratio</li>
+                                <li>✅ <strong>Intensity</strong> - Voice loudness</li>
+                                <li>✅ <strong>Duration</strong> - Temporal measurements</li>
+                            </ul>
+
+                            <div class="warning-box">
+                                <strong>⚠️ Important:</strong> Praat uses traditional signal processing algorithms, NOT machine learning or neural networks. It's based on well-established phonetic science.
+                            </div>
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Technology</th>
+                                    <th>Version</th>
+                                    <th>License</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>NumPy</strong></td>
+                                    <td>1.24.3</td>
+                                    <td>BSD-3-Clause</td>
+                                    <td>Numerical operations</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SciPy</strong></td>
+                                    <td>1.11.4</td>
+                                    <td>BSD-3-Clause</td>
+                                    <td>Statistical analysis</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>stream-chat</strong></td>
+                                    <td>4.26.0</td>
+                                    <td>Proprietary</td>
+                                    <td>Live messaging</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- AI Services -->
+                    <div id="ai-services" class="layer-section">
+                        <h3>🤖 AI & Machine Learning Services</h3>
+                        
+                        <div class="tech-card">
+                            <h3><span class="tech-badge">Generative AI</span> Google Gemini API</h3>
+                            <p><strong>Model:</strong> gemini-2.5-pro | <strong>API Version:</strong> v1beta</p>
+                            <p><strong>SDK:</strong> @google/generative-ai (JavaScript) | <strong>License:</strong> Apache 2.0 (SDK)</p>
+                            
+                            <h4>AI Capabilities</h4>
+                            <div class="feature-list">
+                                <div class="feature-item">
+                                    <h4>Psychological Analysis</h4>
+                                    <ul>
+                                        <li>Interprets stress levels (0-100 scale)</li>
+                                        <li>Analyzes voice biomarkers</li>
+                                        <li>Contextualizes student responses</li>
+                                    </ul>
+                                </div>
+                                <div class="feature-item">
+                                    <h4>Personalized Recommendations</h4>
+                                    <ul>
+                                        <li>Immediate action items (max 3)</li>
+                                        <li>Long-term wellness strategies (max 3)</li>
+                                        <li>Next session timing (3/7/14 days)</li>
+                                    </ul>
+                                </div>
+                                <div class="feature-item">
+                                    <h4>Context-Aware Processing</h4>
+                                    <ul>
+                                        <li>Live session answers (highest priority)</li>
+                                        <li>Pre-session questionnaire responses</li>
+                                        <li>AI summary from voice analysis</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h4>AI Input Data Structure</h4>
+                            <div class="code-block">
+{
+  "stressLevel": 65,
+  "biomarkers": {
+    "pitch": { "value": 180, "status": "red" },
+    "jitter": { "value": 2.5, "status": "orange" },
+    "shimmer": { "value": 5.2, "status": "green" }
+  },
+  "aiSummary": "High stress indicators detected...",
+  "liveSessionAnswers": [
+    {
+      "question": "How are you feeling?",
+      "answer": "I've been anxious about exams"
+    }
+  ],
+  "questionnaireAnswers": { ... }
+}
+                            </div>
+
+                            <h4>AI Output Format</h4>
+                            <div class="code-block">
+IMMEDIATE ACTIONS:
+1. [Specific, actionable advice for right now]
+2. [Another immediate step]
+3. [Third immediate action]
+
+LONG-TERM WELLNESS:
+1. [Sustainable wellness practice]
+2. [Another long-term strategy]
+3. [Third wellness recommendation]
+
+NEXT SESSION: [3 or 7 or 14] days
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Section -->
+                    <div id="security" class="layer-section">
+                        <h3>🔐 Security & Configuration</h3>
+                        
+                        <h4>Environment Variables</h4>
+                        <div class="code-block">
+# Required API Keys
+VITE_GEMINI_API_KEY=&lt;your-gemini-api-key&gt;
+API_KEY=&lt;fallback-gemini-key&gt;
+
+# Stream Chat Configuration
+STREAM_API_KEY=&lt;stream-api-key&gt;
+STREAM_API_SECRET=&lt;stream-api-secret&gt;
+
+# Flask Configuration
+FLASK_ENV=production
+FLASK_DEBUG=False
+                        </div>
+
+                        <h4>Security Features</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Status</th>
+                                    <th>Technology</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>CORS Protection</td>
+                                    <td>✅ Implemented</td>
+                                    <td>Flask-CORS</td>
+                                </tr>
+                                <tr>
+                                    <td>Environment Variables</td>
+                                    <td>✅ Implemented</td>
+                                    <td>python-dotenv</td>
+                                </tr>
+                                <tr>
+                                    <td>HTTPS</td>
+                                    <td>⚠️ Production only</td>
+                                    <td>TLS/SSL</td>
+                                </tr>
+                                <tr>
+                                    <td>API Key Management</td>
+                                    <td>✅ Implemented</td>
+                                    <td>.env files</td>
+                                </tr>
+                                <tr>
+                                    <td>Input Validation</td>
+                                    <td>⚠️ Partial</td>
+                                    <td>Flask validators</td>
+                                </tr>
+                                <tr>
+                                    <td>Rate Limiting</td>
+                                    <td>❌ Not implemented</td>
+                                    <td>Recommended</td>
+                                </tr>
+                                <tr>
+                                    <td>Authentication</td>
+                                    <td>❌ Not implemented</td>
+                                    <td>Recommended</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="warning-box">
+                            <h4>⚠️ Data Privacy Considerations</h4>
+                            <ul>
+                                <li><strong>Voice recordings</strong> - Contains personal biometric data</li>
+                                <li><strong>Chat logs</strong> - Confidential student-counselor conversations</li>
+                                <li><strong>Biomarkers</strong> - Health-related information (HIPAA consideration)</li>
+                                <li><strong>API keys</strong> - Must be kept secure and never committed to version control</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Deployment Section -->
+                    <div id="deployment" class="layer-section">
+                        <h3>🚀 Deployment & Infrastructure</h3>
+                        
+                        <h4>Development Environment</h4>
+                        <div class="code-block">
+Frontend: http://localhost:5173 (Vite dev server)
+Backend:  http://localhost:8000 (Flask dev server)
+                        </div>
+
+                        <h4>Production Environment</h4>
+                        <div class="code-block">
+Frontend: Static build (Vite) → Nginx/CDN
+Backend:  Gunicorn WSGI server → Port 8000
+                        </div>
+
+                        <h4>Deployment Options</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Platform</th>
+                                    <th>Type</th>
+                                    <th>Pros</th>
+                                    <th>Cons</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>AWS</strong></td>
+                                    <td>Cloud IaaS</td>
+                                    <td>Scalable, full control</td>
+                                    <td>Complex setup</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Google Cloud</strong></td>
+                                    <td>Cloud IaaS</td>
+                                    <td>Gemini API integration</td>
+                                    <td>Cost</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Azure</strong></td>
+                                    <td>Cloud IaaS</td>
+                                    <td>Enterprise features</td>
+                                    <td>Learning curve</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Heroku</strong></td>
+                                    <td>PaaS</td>
+                                    <td>Easy deployment</td>
+                                    <td>Limited free tier</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Vercel</strong></td>
+                                    <td>Frontend hosting</td>
+                                    <td>Fast, CDN</td>
+                                    <td>Backend separate</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Railway</strong></td>
+                                    <td>Full-stack PaaS</td>
+                                    <td>Simple, integrated</td>
+                                    <td>Newer platform</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Docker</strong></td>
+                                    <td>Containerization</td>
+                                    <td>Portable, consistent</td>
+                                    <td>Requires orchestration</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Recommended Production Stack</h4>
+                        <div class="diagram-container">
+                            <pre>
+┌─────────────────────────────────────┐
+│ CDN / Static Hosting (Frontend)    │
+│ - Vercel / Netlify / CloudFront    │
+└─────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────┐
+│ Load Balancer (Optional)           │
+│ - AWS ALB / Nginx                  │
+└─────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────┐
+│ Application Servers (Backend)      │
+│ - Docker + Gunicorn                │
+│ - Auto-scaling enabled             │
+└─────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────┐
+│ Database (PostgreSQL)              │
+│ - AWS RDS / Google Cloud SQL       │
+└─────────────────────────────────────┘
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary Section -->
+                <section class="section">
+                    <h2>📝 Summary</h2>
+                    <div class="info-box">
+                        <h4>Key Takeaways</h4>
+                        <ul>
+                            <li><strong>Modern Stack:</strong> React + TypeScript frontend with Flask Python backend</li>
+                            <li><strong>Scientific Analysis:</strong> Praat-parselmouth for evidence-based voice biomarker extraction</li>
+                            <li><strong>AI-Powered:</strong> Google Gemini for psychological interpretation and personalized recommendations</li>
+                            <li><strong>Real-time Communication:</strong> Stream Chat for counselor-student interaction</li>
+                            <li><strong>Production-Ready:</strong> Gunicorn WSGI server with CORS support and environment configuration</li>
+                            <li><strong>Scalable Architecture:</strong> Microservices-ready design with clear separation of concerns</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

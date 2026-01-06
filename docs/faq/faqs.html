@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWAAZ Master Guide - FAQ & Pitch Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-right: 2px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin: 8px 0;
+        }
+
+        .sidebar a {
+            color: #555;
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .sidebar a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .main-content {
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            scroll-margin-top: 20px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+
+        .section h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        .guide-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .guide-card h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+
+        .anchor-line {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-style: italic;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .faq-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .faq-item h3 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .faq-item .answer {
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.7;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #764ba2;
+        }
+
+        .badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight-box h3 {
+            color: #d84315;
+            margin-top: 0;
+        }
+
+        .highlight-box blockquote {
+            margin: 15px 0;
+            padding-left: 20px;
+            border-left: 4px solid #d84315;
+            font-size: 1.1em;
+            font-style: italic;
+            color: #555;
+        }
+
+        .architecture {
+            background: #e8eaf6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .architecture ol {
+            margin-left: 25px;
+            font-size: 1.05em;
+        }
+
+        .architecture li {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .closing-statement {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.15em;
+            line-height: 1.8;
+            margin: 30px 0;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .mindset-box {
+            background: #fff3e0;
+            border: 3px solid #ff9800;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #e65100;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2);
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        strong {
+            color: #667eea;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #e0e0e0;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                height: auto;
+                border-right: none;
+                border-bottom: 2px solid #e0e0e0;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧭 AWAAZ Master Guide</h1>
+            <p>Comprehensive FAQ & Pitch Guide for Judges</p>
+        </div>
+
+        <div class="content-wrapper">
+            <nav class="sidebar">
+                <h2>📑 Index</h2>
+                <ul>
+                    <li><a href="#master-structure">Master Guide Structure</a></li>
+                    <li><a href="#problem-framing">1. Problem Framing</a></li>
+                    <li><a href="#scientific-foundation">2. Scientific Foundation</a></li>
+                    <li><a href="#innovation-design">3. Innovation & Design</a></li>
+                    <li><a href="#ethics-privacy">4. Ethics & Privacy</a></li>
+                    <li><a href="#policy-alignment">5. Policy Alignment</a></li>
+                    <li><a href="#impact-scale">6. Impact & Scale</a></li>
+                    <li><a href="#faqs">Frequently Asked Questions</a></li>
+                    <li><a href="#faq-1">FAQ 1-5</a></li>
+                    <li><a href="#faq-6">FAQ 6-10</a></li>
+                    <li><a href="#faq-11">FAQ 11-15</a></li>
+                    <li><a href="#faq-16">FAQ 16-20</a></li>
+                    <li><a href="#technical">Technical Questions</a></li>
+                    <li><a href="#pitch">30-Second Core Pitch</a></li>
+                    <li><a href="#why-framework">The WHY Framework</a></li>
+                    <li><a href="#key-questions">Other Key Questions</a></li>
+                    <li><a href="#closing">Closing Statement</a></li>
+                    <li><a href="#mindset">Student Mindset</a></li>
+                </ul>
+            </nav>
+
+            <main class="main-content">
+                <section id="master-structure" class="section">
+                    <h2>🧭 Master Guide Structure</h2>
+                    <p>This guide is organized into 6 key areas that judges will evaluate. Each section contains anchor lines, key points, and corresponding FAQ references.</p>
+                </section>
+
+                <section id="problem-framing" class="section">
+                    <div class="guide-card">
+                        <h3><span class="badge">1</span> Problem Framing — "Do they understand the real problem?"</h3>
+                        
+                        <h4>Judges listen for:</h4>
+                        <ul>
+                            <li>Clarity on why the problem exists</li>
+                            <li>Sensitivity (no blame on schools or teachers)</li>
+                            <li>Relevance to Indian context</li>
+                        </ul>
+
+                        <p><strong>👉 Covered by Questions:</strong> 1, 2, 3</p>
+
+                        <div class="anchor-line">
+                            <strong>Anchor Line:</strong> "Students struggle silently—not because they don't need help, but because they don't know how to ask."
+                        </div>
+                    </div>
+                </section>
+
+                <section id="scientific-foundation" class="section">
+                    <div class="guide-card">
+                        <h3><span class="badge">2</span> Scientific Foundation — "Is this real science?"</h3>
+                        
+                        <h4>Judges probe:</h4>
+                        <ul>
+                            <li>Biological or psychological basis</li>
+                            <li>Measurable variables</li>
+                            <li>Difference between science and buzzwords</li>
+                        </ul>
+
+                        <p><strong>👉 Covered by Questions:</strong> 3, 4, 7</p>
+
+                        <div class="anchor-line">
+                            <strong>Anchor Line:</strong> "We measure involuntary voice changes—pitch, breathing, muscle tension—which are well-known stress responses."
+                        </div>
+                    </div>
+                </section>
+
+                <section id="innovation-design" class="section">
+                    <div class="guide-card">
+                        <h3><span class="badge">3</span> Innovation & Design — "What's actually new here?"</h3>
+                        
+                        <h4>Judges test:</h4>
+                        <ul>
+                            <li>Novelty beyond apps and surveys</li>
+                            <li>Practicality in schools</li>
+                            <li>Why this approach over others</li>
+                        </ul>
+
+                        <p><strong>👉 Covered by Questions:</strong> 5, 6, 8, 10, 20</p>
+
+                        <div class="anchor-line">
+                            <strong>Anchor Line:</strong> "The innovation is not AI alone—it's using everyday speech as a digital wellness signal."
+                        </div>
+                    </div>
+                </section>
+
+                <section id="ethics-privacy" class="section">
+                    <div class="guide-card">
+                        <h3><span class="badge">4</span> Ethics, Privacy & Safety — "Is this responsible?"</h3>
+                        
+                        <h4>Judges care deeply about:</h4>
+                        <ul>
+                            <li>Child safety</li>
+                            <li>Data privacy</li>
+                            <li>Misuse risks</li>
+                        </ul>
+
+                        <p><strong>👉 Covered by Questions:</strong> 9, 11, 15</p>
+
+                        <div class="anchor-line">
+                            <strong>Anchor Line:</strong> "AWAAZ never replaces human judgment. It only supports it."
+                        </div>
+                    </div>
+                </section>
+
+                <section id="policy-alignment" class="section">
+                    <div class="guide-card">
+                        <h3><span class="badge">5</span> Policy Alignment & Implementation — "Does this fit India's system?"</h3>
+                        
+                        <h4>Judges look for:</h4>
+                        <ul>
+                            <li>Awareness of national initiatives</li>
+                            <li>Complementing—not criticizing—existing systems</li>
+                            <li>Feasibility at scale</li>
+                        </ul>
+
+                        <p><strong>👉 Covered by Questions:</strong> 12, 13, 14, 16</p>
+
+                        <div class="anchor-line">
+                            <strong>Anchor Line:</strong> "AWAAZ strengthens NEP 2020, UMMEED, MANODARPAN, and Tele-MANAS by enabling early detection."
+                        </div>
+                    </div>
+                </section>
+
+                <section id="impact-scale" class="section">
+                    <div class="guide-card">
+                        <h3><span class="badge">6</span> Impact, Scale & Future — "Why does this matter long-term?"</h3>
+                        
+                        <h4>Judges assess:</h4>
+                        <ul>
+                            <li>Real-world outcomes</li>
+                            <li>Sustainability</li>
+                            <li>Growth beyond the exhibition</li>
+                        </ul>
+
+                        <p><strong>👉 Covered by Questions:</strong> 17, 18, 19</p>
+
+                        <div class="anchor-line">
+                            <strong>Anchor Line:</strong> "Early detection saves time, resources, and potentially lives."
+                        </div>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section id="faqs" class="section">
+                    <h2>❓ Frequently Asked Questions</h2>
+                </section>
+
+                <section id="faq-1" class="section">
+                    <div class="faq-item">
+                        <h3><span class="badge">1</span> Why did you choose this problem?</h3>
+                        <div class="answer">
+                            "Because many students experience stress silently. We wanted to find a way to notice distress early—without forcing students to speak up or label themselves."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">2</span> Aren't schools already addressing mental health?</h3>
+                        <div class="answer">
+                            "Yes, schools are doing their best through counselling and awareness. AWAAZ strengthens these efforts by adding an early, objective signal that can be easily missed."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">3</span> What is the core scientific idea behind AWAAZ?</h3>
+                        <div class="answer">
+                            "Stress causes involuntary changes in the human voice—like pitch, breathing, and muscle tension. These changes can be measured and used as a digital biomarker for early stress."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">4</span> How do we know this is science and not just tech buzz?</h3>
+                        <div class="answer">
+                            "We analyse measurable acoustic features, not emotions or opinions. Voice-based stress research is well-established; AI is only used to process these signals efficiently."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">5</span> Why voice instead of surveys or self-reporting?</h3>
+                        <div class="answer">
+                            "Surveys depend on honesty and comfort. Voice changes happen involuntarily, even when students are unaware or unwilling to share."
+                        </div>
+                    </div>
+                </section>
+
+                <section id="faq-6" class="section">
+                    <div class="faq-item">
+                        <h3><span class="badge">6</span> Why not wearables or biological tests?</h3>
+                        <div class="answer">
+                            "They are costly, invasive, and impractical for large school populations. Voice uses what students already do naturally—talk."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">7</span> How exactly does AWAAZ work (simple architecture)?</h3>
+                        <div class="answer">
+                            "Short voice samples → acoustic feature extraction → stress pattern analysis → anonymised indicators → counsellor alerts. No raw audio is stored."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">8</span> Does AWAAZ diagnose mental illness?</h3>
+                        <div class="answer">
+                            "No. AWAAZ does not diagnose. It only provides early indicators to help adults decide if support is needed."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">9</span> What if the system flags stress where there is none?</h3>
+                        <div class="answer">
+                            "AWAAZ never acts alone. Alerts are reviewed by teachers or counsellors, so human judgment always comes first."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">10</span> Why include digital questionnaires if AWAAZ is voice-based?</h3>
+                        <div class="answer">
+                            "Voice is the primary signal. Questionnaires are optional and only add context when counsellors feel it's needed."
+                        </div>
+                    </div>
+                </section>
+
+                <section id="faq-11" class="section">
+                    <div class="faq-item">
+                        <h3><span class="badge">11</span> How do you protect student privacy?</h3>
+                        <div class="answer">
+                            "No raw voice recordings are stored. Data is anonymised, minimal, and accessible only to authorised wellness staff."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">12</span> India has many languages. Will this work everywhere?</h3>
+                        <div class="answer">
+                            "Yes. We analyse how a student speaks, not what they say. Stress-related voice changes are language-independent."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">13</span> How does AWAAZ fit into daily school routines?</h3>
+                        <div class="answer">
+                            "It works during normal classroom activities and uses existing devices—no extra periods or disruption."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">14</span> How does this align with Government of India initiatives?</h3>
+                        <div class="answer">
+                            "AWAAZ supports NEP 2020, UMMEED, MANODARPAN, Tele-MANAS, and the Supreme Court's 2025 guidelines by enabling early, stigma-free detection."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">15</span> Are you saying existing initiatives are insufficient?</h3>
+                        <div class="answer">
+                            "No. They provide the framework. AWAAZ amplifies them by offering a practical, scalable early-detection tool."
+                        </div>
+                    </div>
+                </section>
+
+                <section id="faq-16" class="section">
+                    <div class="faq-item">
+                        <h3><span class="badge">16</span> How do teachers benefit from this?</h3>
+                        <div class="answer">
+                            "Teachers receive simple indicators, not complex data—helping them notice students who may need attention earlier."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">17</span> How do you measure success beyond detection?</h3>
+                        <div class="answer">
+                            "Earlier interventions, faster support, reduced escalation, and healthier classroom trends over time."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">18</span> Can this scale beyond one school?</h3>
+                        <div class="answer">
+                            "Yes. It's low-cost, device-light, and suitable for schools, colleges, and coaching institutes."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">19</span> What stage is the project at now?</h3>
+                        <div class="answer">
+                            "We have a working proof of concept and are discussing a pilot with our own school, which helps us test responsibly."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3><span class="badge">20</span> What makes AWAAZ innovative?</h3>
+                        <div class="answer">
+                            "It transforms everyday speech into a non-invasive wellness signal—quietly, ethically, and at scale."
+                        </div>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section id="technical" class="section">
+                    <h2>⚙️ Technical Questions</h2>
+                    
+                    <div class="faq-item">
+                        <h3>Can you help me understand the AWAAZ architecture?</h3>
+                        <div class="architecture">
+                            <h4>Architecture Overview:</h4>
+                            <ol>
+                                <li><strong>Browser (UI)</strong> → React</li>
+                                <li><strong>Flask API</strong> → Python API</li>
+                                <li><strong>Praat Analysis</strong> → Voice Biomarker</li>
+                                <li><strong>Combined Analysis and Gemini API</strong> → Personalized Summary</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section id="pitch" class="section">
+                    <h2>🎯 30-Second Core Pitch</h2>
+                    
+                    <div class="highlight-box">
+                        <h3>Start Here If Judges Ask "Explain Your Project"</h3>
+                        <blockquote>
+                            "AWAAZ stands for <strong>Audio Wellness Analytics for Academic Zones</strong>.
+                            <br><br>
+                            It uses AI to detect early stress through natural speech, based on involuntary voice changes caused by stress.
+                            <br><br>
+                            It is non-invasive, stigma-free, privacy-first, and designed for Indian school environments.
+                            <br><br>
+                            AWAAZ does not diagnose mental illness — it provides early warning signals so teachers and counsellors can support students before stress becomes a crisis."
+                        </blockquote>
+                    </div>
+                </section>
+
+                <section id="why-framework" class="section">
+                    <h2>💡 The WHY (Simon Sinek Framework – Judge-Optimised)</h2>
+                    
+                    <div class="guide-card">
+                        <h3>WHY</h3>
+                        <div class="anchor-line">
+                            "Because emotionally healthy students today create a resilient and thriving India tomorrow."
+                        </div>
+                    </div>
+
+                    <div class="guide-card">
+                        <h3>WHAT</h3>
+                        <div class="anchor-line">
+                            "A voice-based early stress detection system for students."
+                        </div>
+                    </div>
+
+                    <div class="guide-card">
+                        <h3>HOW</h3>
+                        <div class="anchor-line">
+                            "By analysing involuntary vocal stress markers through everyday speech — quietly, continuously, and ethically — without requiring students to speak up."
+                        </div>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section id="key-questions" class="section">
+                    <h2>🔑 Other Key Questions</h2>
+
+                    <div class="faq-item">
+                        <h3>If Judges Ask: "Why the Name AWAAZ?"</h3>
+                        <div class="answer">
+                            "AWAAZ means 'voice'.
+                            <br><br>
+                            Many students don't speak up when they're stressed — so we built a system that listens through their natural voice and helps adults notice early signs."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>If Judges Ask: "Why Schools? Why Not Hospitals?"</h3>
+                        <div class="answer">
+                            "Because schools are the largest daily social environment for adolescents.
+                            <br><br>
+                            By the time students reach hospitals, stress has already escalated.
+                            <br><br>
+                            AWAAZ focuses on prevention, not crisis response."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>If Judges Ask: "Is This Scalable?"</h3>
+                        <div class="answer">
+                            "Yes. It uses existing school devices, requires minimal training, and no additional class time — making it feasible across Indian schools."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>If Judges Ask: "Why Voice?"</h3>
+                        <div class="answer">
+                            "Stress affects breathing and muscle tension, which involuntarily change the voice.
+                            <br><br>
+                            Students can hide emotions — but they cannot control these micro vocal signals."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>If Judges Ask: "How Accurate Is This?"</h3>
+                        <div class="answer">
+                            "AWAAZ focuses on patterns over time, not one-time readings.
+                            <br><br>
+                            It reduces false alarms by combining trends with human review."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>If Judges Ask: "What Are the Limitations?"</h3>
+                        <div class="answer">
+                            "At our level, we focused on concept validation, ethics, and feasibility.
+                            <br><br>
+                            With institutional support, accuracy and scale can be further strengthened."
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>If Judges Ask: "What Is the Social Impact?"</h3>
+                        <div class="answer">
+                            "Early detection reduces escalation, supports teachers, protects student dignity, and strengthens schools as safe spaces."
+                        </div>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section id="closing" class="section">
+                    <h2>🎤 Strong Closing Statement</h2>
+                    
+                    <div class="closing-statement">
+                        "AWAAZ ensures that no student's distress goes unheard — not even the silent kind.
+                        <br><br>
+                        With one simple idea, we transform everyday speech into early support, save precious time, and maybe even save lives.
+                        <br><br>
+                        Thank you for listening — and for helping students speak without speaking."
+                    </div>
+                </section>
+
+                <section id="mindset" class="section">
+                    <h2>🧠 One-Line Student Mindset to Remember</h2>
+                    
+                    <div class="mindset-box">
+                        We are not claiming perfection; we are offering an ethical, early-warning approach that strengthens existing support systems.
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+</body>
+</html>

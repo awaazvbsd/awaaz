@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWAAZ - AI-Powered Audio Wellness Analytics for Academic Zones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #ff6b6b;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #fff;
+            font-size: 80%;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar .logo-container img {
+            height: 50px;
+            width: auto;
+        }
+
+        .navbar h1 {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar nav > ul > li {
+            position: relative;
+        }
+
+        .navbar nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+            font-size: 1.05em;
+        }
+
+        .navbar nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            z-index: 9999;
+            overflow: hidden;
+            padding-top: 5px;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--text-dark) !important;
+            padding: 12px 20px;
+            display: block;
+            transition: background 0.3s ease;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--bg-light);
+            opacity: 1 !important;
+        }
+
+        .dropdown > a {
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .dropdown > a::after {
+            content: ' ▾';
+        }
+
+        /* Bridge the gap between menu and dropdown */
+        .dropdown::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: transparent;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero .subtitle {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        /* Vision & Mission Section */
+        .vision-mission {
+            max-width: 1400px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+
+        .vision-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 6px solid #2196f3;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+        }
+
+        .vision-box h2 {
+            color: #1976d2;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .vision-box p {
+            font-size: 1.2em;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .mission-box {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-left: 6px solid var(--secondary-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.2);
+        }
+
+        .mission-box h2 {
+            color: var(--secondary-color);
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .mission-box ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .mission-box li {
+            font-size: 1.15em;
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-dark);
+        }
+
+        .mission-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        /* Section Styling */
+        .section {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 0 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.2em;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 20px auto 0;
+        }
+
+        /* Video Container */
+        .video-container {
+            max-width: 350px;
+            margin: 40px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+            max-height: 60vh;
+            object-fit: contain;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 3px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.15);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .stat-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .stat-card h3 {
+            color: var(--accent-color);
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            color: var(--text-light);
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: var(--bg-light);
+            padding: 60px 40px;
+            margin: 80px 0;
+        }
+
+        .resources-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .resource-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .resource-card .icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .resource-card h3 {
+            color: var(--text-dark);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .resource-card a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Impact Section */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .impact-card {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 6px solid var(--success-color);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+        }
+
+        .impact-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: var(--success-color);
+        }
+
+        .impact-card h3 {
+            color: var(--success-color);
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .impact-card p {
+            color: var(--text-dark);
+            font-size: 1.15em;
+            line-height: 1.8;
+        }
+
+        /* Phase Timeline */
+        .timeline {
+            max-width: 900px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+            width: 100%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .timeline-content {
+            background: white;
+            border: 3px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 30px;
+            width: 45%;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: 55%;
+        }
+
+        .timeline-badge {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: 5px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3em;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            z-index: 10;
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-color);
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .timeline-content p {
+            color: var(--text-dark);
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .timeline:before {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+                margin-right: 0 !important;
+            }
+
+            .timeline-badge {
+                left: 30px;
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .dropdown-content {
+                position: relative;
+                box-shadow: none;
+                margin-top: 5px;
+            }
+
+            .hero h1 {
+                font-size: 2.2em;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1em;
+            }
+
+            .section {
+                margin: 50px auto;
+                padding: 0 20px;
+            }
+
+            .features-grid,
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-4 {
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo-container">
+                <img src="logo/awaaz-logo1.jpg" alt="AWAAZ Logo">
+                <h1>AWAAZ</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#vision">Vision & Mission</a></li>
+                    <li><a href="#challenges">Challenges</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#impact">Impact</a></li>
+                    <li><a href="#rollout">Rollout Plan</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);">Resources</a>
+                        <div class="dropdown-content">
+                            <a href="demo/Awaaz-Teaser-video.mp4" target="_blank">Demo Video</a>
+                            <a href="architecture/index.html" target="_blank">Arch Diagram</a>
+                            <a href="faq/faqs.html" target="_blank">FAQ</a>
+                        </div>
+                    </li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>AWAAZ</h1>
+        <p class="subtitle">AI-Powered Audio Wellness Analytics for Academic Zones</p>
+        <p style="font-size: 1.15em; max-width: 900px; margin: 0 auto;">Empowering institutions for early stress detection, timely intervention, and healthier futures</p>
+    </section>
+
+    <!-- Vision & Mission Section -->
+    <section id="vision" class="vision-mission">
+        <div class="vision-box">
+            <h2>🎯 Our Vision</h2>
+            <p>Empowering institutions for early stress detection, timely intervention, and healthier futures for every student.</p>
+        </div>
+
+        <div class="mission-box">
+            <h2>🚀 Our Mission</h2>
+            <ul>
+                <li>Technology-enabled, scalable, low-cost solution for mental wellness</li>
+                <li>Reduce stigma & prevent tragedies through proactive care</li>
+                <li>Complement NEP 2020 & initiatives like Tele-MANAS, UMMEED, & MANODARPAN</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Hidden Struggles Section -->
+    <section id="challenges" class="section">
+        <div class="section-header">
+            <h2>📚 The Hidden Struggles in Classrooms</h2>
+            <p>Understanding the growing mental health crisis among students</p>
+        </div>
+
+        <!-- Video Container -->
+        <div class="video-container">
+            <video controls poster="">
+                <source src="demo/Awaaz-Teaser-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="icon">📈</div>
+                <h3>34% Increase</h3>
+                <p>Student suicides rose alarmingly from 2019 to 2023, with <span class="highlight">13,892 cases in 2023</span></p>
+            </div>
+
+            <div class="stat-card">
+                <div class="icon">😰</div>
+                <h3>1 in 4 Students</h3>
+                <p>Experience stress severe enough to harm their mental health</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="icon">📚</div>
+                <h3>Rising Pressure</h3>
+                <p>Academic pressure is intensifying, driven by exam anxiety and fear of failure</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="section-header">
+            <h2>✨ AI-Powered AWAAZ: Key Features</h2>
+            <p>Comprehensive, privacy-first mental wellness solution for educational institutions</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">🎤</div>
+                <h3>Voice Analysis</h3>
+                <p>AI-powered voice analysis to detect stress patterns through speech biomarkers like pitch, jitter, and shimmer</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">📋</div>
+                <h3>Digital Questionnaires</h3>
+                <p>Comprehensive questionnaires complement voice data for accurate mental health screening</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <h3>Wellness Reports</h3>
+                <p>Detailed student wellness reports with actionable insights and personalized recommendations</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🔔</div>
+                <h3>Real-time Alerts</h3>
+                <p>Instant notifications to counselors about high-risk students requiring immediate attention</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">👨‍👩‍👧</div>
+                <h3>360° Feedback</h3>
+                <p>Integrates observations from parents, teachers, and peers for holistic assessment</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">💡</div>
+                <h3>Data-Driven Insights</h3>
+                <p>Identify stress types: bullying, peer pressure, exam stress, and family issues</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🔒</div>
+                <h3>Privacy-First Design</h3>
+                <p>Strict confidentiality with encrypted data storage and minimal data retention</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🤖</div>
+                <h3>AI-Powered Analysis</h3>
+                <p>Google Gemini AI provides psychological interpretation and personalized wellness strategies</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <div class="resources-section">
+        <div class="section-header">
+            <h2>📁 Resources & Documentation</h2>
+            <p>Explore our comprehensive documentation, architecture, and FAQs</p>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="icon">🏗️</div>
+                <h3>System Architecture</h3>
+                <p>Complete technical documentation with data flow diagrams and technology stack</p>
+                <a href="architecture/index.html" target="_blank">View Architecture</a>
+            </div>
+
+            <div class="resource-card">
+                <div class="icon">❓</div>
+                <h3>FAQ & Master Guide</h3>
+                <p>Comprehensive FAQ and pitch guide for presentations and judge questions</p>
+                <a href="faq/faqs.html" target="_blank">View FAQs</a>
+            </div>
+
+            <div class="resource-card">
+                <div class="icon">📊</div>
+                <h3>Demo Presentation</h3>
+                <p>Download our complete presentation slides</p>
+                <a href="demo/Awaaz.pptx" download>Download PPT</a>
+            </div>
+
+            <div class="resource-card">
+                <div class="icon">🎬</div>
+                <h3>Teaser Video</h3>
+                <p>Watch our introduction video showcasing the problem and solution</p>
+                <a href="demo/Awaaz-Teaser-video.mp4" target="_blank">Watch Video</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Impact Section -->
+    <section id="impact" class="section">
+        <div class="section-header">
+            <h2>🌟 Societal Impact</h2>
+            <p>Creating lasting positive change in mental health support for students</p>
+        </div>
+
+        <div class="impact-grid">
+            <div class="impact-card">
+                <div class="icon">🛡️</div>
+                <h3>Prevention & Early Detection</h3>
+                <p>Early stress detection prevents escalation and significantly reduces suicide risk by enabling timely intervention before crises develop.</p>
+            </div>
+
+            <div class="impact-card">
+                <div class="icon">🌍</div>
+                <h3>Scalable Solution</h3>
+                <p>Deployable across schools, colleges, and coaching institutes for wide reach. Low-cost, technology-enabled approach makes it accessible nationwide.</p>
+            </div>
+
+            <div class="impact-card">
+                <div class="icon">🤝</div>
+                <h3>Policy Alignment</h3>
+                <p>Strengthens NEP 2020, UMMEED, MANODARPAN, and Tele-MANAS initiatives through practical, scalable early-detection tools.</p>
+            </div>
+
+            <div class="impact-card">
+                <div class="icon">❤️</div>
+                <h3>Stigma Reduction</h3>
+                <p>Non-invasive, voice-based approach reduces stigma associated with mental health screening and encourages participation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rollout Plan Section -->
+    <section id="rollout" class="section">
+        <div class="section-header">
+            <h2>🗓️ Phase-wise Pilot Rollout Plan</h2>
+            <p>Structured approach to implementing AWAAZ in educational institutions</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-badge">1</div>
+                <div class="timeline-content">
+                    <h3>Phase 1: Engagement & Onboarding</h3>
+                    <p><strong>Activities:</strong> Stakeholder meetings with school administration, counselors, teachers, and parents. Presentation of AWAAZ benefits and addressing concerns.</p>
+                    <p><strong>Duration:</strong> 2-3 weeks</p>
+                    <p><strong>Outcome:</strong> Buy-in from all stakeholders and formal agreement to pilot</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-badge">2</div>
+                <div class="timeline-content">
+                    <h3>Phase 2: Infrastructure Setup</h3>
+                    <p><strong>Activities:</strong> Install necessary hardware (microphones, servers). Configure software systems and test data flow. Set up secure data storage and privacy protocols.</p>
+                    <p><strong>Duration:</strong> 3-4 weeks</p>
+                    <p><strong>Outcome:</strong> Fully operational system ready for testing</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-badge">3</div>
+                <div class="timeline-content">
+                    <h3>Phase 3: Training & Awareness</h3>
+                    <p><strong>Activities:</strong> Train counselors on interpreting AI reports. Educate teachers on using the system. Conduct student awareness sessions on privacy and benefits.</p>
+                    <p><strong>Duration:</strong> 2-3 weeks</p>
+                    <p><strong>Outcome:</strong> All users comfortable with the system and ready for launch</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-badge">4</div>
+                <div class="timeline-content">
+                    <h3>Phase 4: Pilot Launch & Monitoring</h3>
+                    <p><strong>Activities:</strong> Begin with small student cohort (50-100 students). Daily monitoring and feedback collection. Iterative improvements based on real-world usage.</p>
+                    <p><strong>Duration:</strong> 8-12 weeks</p>
+                    <p><strong>Outcome:</strong> Validated system with proven impact metrics</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-badge">5</div>
+                <div class="timeline-content">
+                    <h3>Phase 5: Full-Scale Deployment</h3>
+                    <p><strong>Activities:</strong> Expand to entire school population. Continuous monitoring and optimization. Regular reporting to stakeholders on impact and outcomes.</p>
+                    <p><strong>Duration:</strong> Ongoing</p>
+                    <p><strong>Outcome:</strong> Comprehensive mental wellness support for all students</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="section-header">
+            <h2>📧 Contact Us</h2>
+            <p>Get in touch with the AWAAZ team</p>
+        </div>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div style="background: white; border-radius: 15px; padding: 40px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: var(--primary-color); margin-bottom: 30px; text-align: center; font-size: 1.5em;">Meet the Team</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px;">
+                    <div style="text-align: center; padding: 20px; background: var(--bg-light); border-radius: 10px;">
+                        <div style="font-size: 3em; margin-bottom: 10px;">👨‍💻</div>
+                        <h4 style="color: var(--text-dark); margin-bottom: 10px; font-size: 1.2em;">Arav Vijayvergia</h4>
+                        <a href="https://www.linkedin.com/in/arav-vijayvergia-413a373a2/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #0077b5; text-decoration: none; font-weight: 600;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#0077b5">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                            LinkedIn Profile
+                        </a>
+                    </div>
+
+                    <div style="text-align: center; padding: 20px; background: var(--bg-light); border-radius: 10px;">
+                        <div style="font-size: 3em; margin-bottom: 10px;">👨‍💻</div>
+                        <h4 style="color: var(--text-dark); margin-bottom: 10px; font-size: 1.2em;">Rushil Sunder</h4>
+                        <a href="https://www.linkedin.com/in/rushil-sunder-1133173a0/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #0077b5; text-decoration: none; font-weight: 600;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#0077b5">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                            LinkedIn Profile
+                        </a>
+                    </div>
+                </div>
+
+                <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 10px; margin-top: 20px;">
+                    <div style="font-size: 2.5em; margin-bottom: 15px;">📧</div>
+                    <h4 style="color: var(--text-dark); margin-bottom: 10px; font-size: 1.2em;">Email Us</h4>
+                    <a href="mailto:awaaz.vbsd@gmail.com" style="color: var(--primary-color); text-decoration: none; font-weight: 600; font-size: 1.1em;">
+                        awaaz.vbsd@gmail.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><strong>AWAAZ</strong> - Empowering Institutions for Healthier Student Futures</p>
+        <p>© 2026 AWAAZ Project. All Rights Reserved.</p>
+        <p style="margin-top: 20px; font-size: 0.95em;">For more information, visit our <a href="architecture/index.html">Technical Documentation</a> or <a href="faq/faqs.html">FAQ Guide</a></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards for animation
+        document.querySelectorAll('.stat-card, .feature-card, .impact-card, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
