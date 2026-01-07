@@ -843,6 +843,22 @@
             line-height: 1.7;
         }
 
+        /* Email Contact Box */
+        .email-contact-box {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px solid rgba(33, 150, 243, 0.3);
+        }
+
+        [data-theme="dark"] .email-contact-box {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.35) 0%, rgba(30, 136, 229, 0.3) 100%);
+            border: 2px solid rgba(66, 165, 245, 0.6);
+            box-shadow: 0 4px 20px rgba(33, 150, 243, 0.2);
+        }
+
         /* Footer */
         .footer {
             background: var(--card-bg);
@@ -1326,7 +1342,7 @@
                     </div>
                 </div>
 
-                <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 10px; margin-top: 20px;">
+                <div class="email-contact-box">
                     <div style="font-size: 2.5em; margin-bottom: 15px;">📧</div>
                     <h4 style="color: var(--text-dark); margin-bottom: 10px; font-size: 1.2em;">Email Us</h4>
                     <a href="mailto:awaaz.vbsd@gmail.com" style="color: var(--primary-color); text-decoration: none; font-weight: 600; font-size: 1.1em;">
