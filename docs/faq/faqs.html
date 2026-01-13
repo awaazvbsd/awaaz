@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,29 +11,90 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #ff9800;
+            --text-dark: #1a1a2e;
+            --text-light: #666;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: rgba(102, 126, 234, 0.2);
+            --border-color: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(102, 126, 234, 0.3);
+        }
+
+        [data-theme="dark"] {
+            --text-dark: #f0f0f0;
+            --text-light: #b0b0b0;
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --card-bg: rgba(30, 30, 46, 0.95);
+            --card-border: rgba(102, 126, 234, 0.3);
+            --border-color: rgba(102, 126, 234, 0.2);
+            --shadow: rgba(0, 0, 0, 0.4);
+            --shadow-hover: rgba(102, 126, 234, 0.5);
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             min-height: 100vh;
             padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 12px 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px var(--shadow-hover);
+        }
+
+        .theme-toggle-icon {
+            font-size: 1.3em;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: var(--bg-primary);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px var(--shadow);
             overflow: hidden;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
-            padding: 40px;
+            padding: 50px 40px;
             text-align: center;
+            position: relative;
         }
 
         .header h1 {
@@ -54,9 +115,9 @@
         }
 
         .sidebar {
-            background: #f8f9fa;
+            background: var(--bg-secondary);
             padding: 30px 20px;
-            border-right: 2px solid #e0e0e0;
+            border-right: 2px solid var(--border-color);
             position: sticky;
             top: 0;
             height: 100vh;
@@ -66,8 +127,8 @@
         .sidebar h2 {
             font-size: 1.2em;
             margin-bottom: 15px;
-            color: #667eea;
-            border-bottom: 2px solid #667eea;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
             padding-bottom: 10px;
         }
 
@@ -80,17 +141,17 @@
         }
 
         .sidebar a {
-            color: #555;
+            color: var(--text-light);
             text-decoration: none;
             display: block;
-            padding: 8px 12px;
-            border-radius: 6px;
+            padding: 10px 14px;
+            border-radius: 8px;
             transition: all 0.3s ease;
             font-size: 0.95em;
         }
 
         .sidebar a:hover {
-            background: #667eea;
+            background: var(--primary-color);
             color: white;
             transform: translateX(5px);
         }
@@ -101,42 +162,52 @@
         }
 
         .section {
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             scroll-margin-top: 20px;
         }
 
         .section h2 {
-            color: #667eea;
-            font-size: 2em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
         }
 
         .section h3 {
-            color: #764ba2;
-            font-size: 1.5em;
+            color: var(--secondary-color);
+            font-size: 1.6em;
             margin: 30px 0 15px 0;
         }
 
         .section h4 {
-            color: #555;
-            font-size: 1.2em;
+            color: var(--text-dark);
+            font-size: 1.3em;
             margin: 20px 0 10px 0;
         }
 
+        .section p {
+            color: var(--text-dark);
+        }
+
         .guide-card {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: var(--bg-secondary);
+            border-left: 5px solid var(--primary-color);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .guide-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 20px var(--shadow-hover);
         }
 
         .guide-card h3 {
             margin-top: 0;
-            color: #667eea;
+            color: var(--primary-color);
         }
 
         .anchor-line {
@@ -146,39 +217,48 @@
             border-radius: 8px;
             margin: 15px 0;
             font-style: italic;
-            font-weight: 500;
+            font-weight: 600;
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .anchor-line strong {
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
         }
 
         .faq-item {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 20px 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
             transition: all 0.3s ease;
         }
 
         .faq-item:hover {
-            border-color: #667eea;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
-            transform: translateY(-2px);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 25px var(--shadow-hover);
+            transform: translateY(-3px);
         }
 
         .faq-item h3 {
-            color: #667eea;
+            color: var(--primary-color);
             margin-top: 0;
             margin-bottom: 15px;
+            font-size: 1.4em;
         }
 
         .faq-item .answer {
-            color: #555;
-            font-size: 1.05em;
-            line-height: 1.7;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 6px;
-            border-left: 3px solid #764ba2;
+            color: var(--text-light);
+            font-size: 1.1em;
+            line-height: 1.8;
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-color);
         }
 
         .badge {
@@ -215,20 +295,21 @@
         }
 
         .architecture {
-            background: #e8eaf6;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border: 1px solid var(--border-color);
         }
 
         .architecture ol {
             margin-left: 25px;
-            font-size: 1.05em;
+            font-size: 1.1em;
         }
 
         .architecture li {
-            margin: 10px 0;
-            color: #555;
+            margin: 12px 0;
+            color: var(--text-dark);
         }
 
         .closing-statement {
@@ -263,16 +344,16 @@
 
         li {
             margin: 8px 0;
-            color: #555;
+            color: var(--text-dark);
         }
 
         strong {
-            color: #667eea;
+            color: var(--primary-color);
         }
 
         hr {
             border: none;
-            border-top: 2px solid #e0e0e0;
+            border-top: 2px solid var(--border-color);
             margin: 30px 0;
         }
 
@@ -285,11 +366,22 @@
                 position: relative;
                 height: auto;
                 border-right: none;
-                border-bottom: 2px solid #e0e0e0;
+                border-bottom: 2px solid var(--border-color);
             }
 
             .main-content {
                 padding: 20px;
+            }
+
+            .theme-toggle {
+                top: auto;
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 18px;
+            }
+
+            .theme-toggle span:last-child {
+                display: none;
             }
         }
 
@@ -313,6 +405,12 @@
     </style>
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="theme-toggle-icon" id="theme-icon">☀️</span>
+        <span id="theme-text">Light Mode</span>
+    </button>
+
     <div class="container">
         <div class="header">
             <h1>🧭 AWAAZ Master Guide</h1>
@@ -773,5 +871,58 @@
             </main>
         </div>
     </div>
+
+    <script>
+        // Theme Toggle Function
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+                localStorage.setItem('awaaz-faq-theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+                localStorage.setItem('awaaz-faq-theme', 'dark');
+            }
+        }
+
+        // Load saved theme on page load (default to dark)
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('awaaz-faq-theme') || 'dark';
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+            }
+        });
+
+        // Smooth scrolling for sidebar links
+        document.querySelectorAll('.sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
